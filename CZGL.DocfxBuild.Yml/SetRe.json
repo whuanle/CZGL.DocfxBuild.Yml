@@ -1,0 +1,4 @@
+﻿{
+  "Dir_Exclude": [ ".git", "image", "images"],
+  "File_Exclude": [ "toc.yml"]
+}
