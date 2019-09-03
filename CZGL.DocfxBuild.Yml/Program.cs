@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.IO;
 using System.Threading.Tasks;
 using System.Linq;
@@ -15,7 +15,7 @@ namespace CZGL.DocfxBuild.Yml
             BuildYml build = new BuildYml();
             Console.WriteLine("输入要处理的目录：");
             string a = Console.ReadLine();
-            Console.WriteLine("指定每个目录要生成的默认首页规则：\n1.以每个目录第一个.md为首页(输入序号 1) \n" +
+            Console.WriteLine("指定每个目录要生成的默认首页规则：\n1.默认生成方式(输入序号 1) \n" +
                 "2. 每个目录以 index.md 为首页(输入序号 2)\n" +
                 "3. 其他规则请直接输入文件名(如 home.md)");
             string b = Console.ReadLine();
@@ -23,7 +23,8 @@ namespace CZGL.DocfxBuild.Yml
             {
                 case "1": build.homewhat = 1; break;
                 case "2": build.homewhat = 2; build.homepagename = "index.md"; break;
-                default: build.homewhat = 3; build.homepagename = b; break;
+                case "3": build.homewhat = 3; build.homepagename = b; break;
+                default: return;
             }
             Console.WriteLine("处理结果：" + build.Builder(a));
             Console.WriteLine("输入 d 可以删除生成的文件");
@@ -145,7 +146,7 @@ namespace CZGL.DocfxBuild.Yml
                 string[] files = Directory.GetFiles(dirpath);
                 if (dirs.Length == 0 && files.Length == 0)
                 {
-                    FileStream x = new FileStream(Path.Combine(dirpath, "Empty.md"),FileMode.OpenOrCreate);
+                    FileStream x = new FileStream(Path.Combine(dirpath, "Empty.md"), FileMode.OpenOrCreate);
                     var markdown = Encoding.Default.GetBytes("This an empty directory");
                     x.WriteAsync(markdown, 0, markdown.Length);
                     files = Directory.GetFiles(dirpath);
@@ -180,7 +181,7 @@ namespace CZGL.DocfxBuild.Yml
                     {
                         if (homewhat == 1)
                         {
-                            writer.WriteLine("  homepage: " + Path.GetFileName(files[0]));
+                            writer.WriteLine("  homepage: " + Path.GetFileName(files[files.Length - 1]));
                         }
                         else if (homewhat == 2)
                         {
