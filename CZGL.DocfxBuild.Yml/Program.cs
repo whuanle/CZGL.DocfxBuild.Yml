@@ -58,21 +58,21 @@ namespace CZGL.DocfxBuild.Yml
             }
             if (isSpilt == true)
                 while (true)
-            {
+                {
 
-                Console.WriteLine("是否需要修改文件(去除目录或文件的序号)：\n输入(y/n)");
-                string vc = Console.ReadLine();
-                if (vc.ToLower() == "y")
-                {
-                    isSpiltAll = true;
-                    break;
+                    Console.WriteLine("是否需要修改文件(去除目录或文件的序号)：\n输入(y/n)");
+                    string vc = Console.ReadLine();
+                    if (vc.ToLower() == "y")
+                    {
+                        isSpiltAll = true;
+                        break;
+                    }
+                    else if (vc.ToLower() == "n")
+                    {
+                        break;
+                    }
+                    Console.WriteLine("输入无效，请重新输入");
                 }
-                else if (vc.ToLower() == "n")
-                {
-                    break;
-                }
-                Console.WriteLine("输入无效，请重新输入");
-            }
             if (isSpilt == true)
                 Console.WriteLine("输入序号分隔符：");
             Spilt = Console.ReadLine();
@@ -272,10 +272,10 @@ namespace CZGL.DocfxBuild.Yml
                         writer.WriteLine("- name: " + fileName);
                         if (Program.isSpiltAll == true)
                         {
-                            writer.WriteLine("  href: " + fileName);
+                            writer.WriteLine("  href: " + fileName + ".md");
                         }
 
-                        else writer.WriteLine("  href: " + Path.GetFileName(item));
+                        else writer.WriteLine("  href: " + Path.GetFileName(item) + ".md");
                     }
                     if (files.Length != 0)
                     {
