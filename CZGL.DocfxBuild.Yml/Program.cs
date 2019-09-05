@@ -261,7 +261,7 @@ namespace CZGL.DocfxBuild.Yml
                     }
                     foreach (var item in files)
                     {
-                        string fileName = Path.GetFileName(item).Replace(".md", "").Replace(".MD", "");
+                        string fileName = Path.GetFileName(item);
                         if (Program.isSpilt)
                         {
                             string[] filesp = fileName.Split(Program.Spilt, 2);
@@ -269,13 +269,13 @@ namespace CZGL.DocfxBuild.Yml
                                 fileName = filesp[1];
                             else fileName = filesp[0];
                         }
-                        writer.WriteLine("- name: " + fileName);
+                        writer.WriteLine("- name: " + fileName.Replace(".md", "").Replace(".MD", ""));
                         if (Program.isSpiltAll == true)
                         {
-                            writer.WriteLine("  href: " + fileName + ".md");
+                            writer.WriteLine("  href: " + fileName);
                         }
 
-                        else writer.WriteLine("  href: " + Path.GetFileName(item) + ".md");
+                        else writer.WriteLine("  href: " + Path.GetFileName(item));
                     }
                     if (files.Length != 0)
                     {
