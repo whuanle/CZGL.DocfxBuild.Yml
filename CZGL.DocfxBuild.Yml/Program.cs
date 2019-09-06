@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.IO;
 using System.Threading.Tasks;
 using System.Linq;
@@ -282,7 +282,7 @@ namespace CZGL.DocfxBuild.Yml
                         if (homewhat == 1)
                         {
                             string homepage = Path.GetFileName(files[files.Length - 1]);
-                            if (Program.isSpilt)
+                            if (Program.isSpiltAll)
                             {
                                 string[] filesp = homepage.Split(Program.Spilt, 2);
                                 if (filesp.Length > 1)
